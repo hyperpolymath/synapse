@@ -1,0 +1,26 @@
+# Zig build artifacts
+zig-out/
+zig-cache/
+.zig-cache/
+
+# Generated Swift (optional - you might want to commit these)
+# examples/swift/Generated.swift
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Xcode
+xcuserdata/
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+DerivedData/
