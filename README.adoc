@@ -1,10 +1,10 @@
-# Synapse
+= Synapse
 
-**Rust-to-SwiftUI Meta-Compiler**
+*Rust-to-SwiftUI Meta-Compiler*
 
 A Zig-based code generator that bridges the Rust↔Swift divide. Write your domain models once in Rust, get type-safe SwiftUI ViewModels automatically.
 
-## The Problem
+== The Problem
 
 Most developers:
 1. Write Rust logic
@@ -12,33 +12,33 @@ Most developers:
 3. Apple releases iOS 18, deprecates `@StateObject` for `@Observable`
 4. Spend 3 weeks rewriting 50 files manually
 
-This is **Slop**.
+This is *Slop*.
 
-## The Solution
+== The Solution
 
 With Synapse:
 1. Update `swift_templates.zig` line 12
 2. Run `just gen-ui`
 3. Entire app upgraded to latest iOS standards instantly
 
-You've effectively **decoupled your IP (Rust) from the whims of the platform (Apple)**.
+You've effectively *decoupled your IP (Rust) from the whims of the platform (Apple)*.
 
-## Quick Start
+== Quick Start
 
 ```bash
-# Build Synapse
+= Build Synapse
 just build
 
-# Generate Swift from Rust
+= Generate Swift from Rust
 just gen-ui
 
-# Check the output
+= Check the output
 cat examples/swift/Generated.swift
 ```
 
-## Usage
+== Usage
 
-### 1. Mark your Rust structs
+=== 1. Mark your Rust structs
 
 ```rust
 #[derive(Synapse)]
@@ -48,13 +48,13 @@ pub struct PlayerState {
 }
 ```
 
-### 2. Run the generator
+=== 2. Run the generator
 
 ```bash
 just gen-ui input=src/models.rs output=ios/Generated.swift
 ```
 
-### 3. Use in SwiftUI
+=== 3. Use in SwiftUI
 
 ```swift
 import SwiftUI
@@ -68,7 +68,7 @@ struct PlayerView: View {
 }
 ```
 
-## Commands
+== Commands
 
 | Command | Description |
 |---------|-------------|
@@ -79,7 +79,7 @@ struct PlayerView: View {
 | `just deploy-ios ~/MyApp` | Generate and copy to Xcode project |
 | `just help` | Show CLI help |
 
-## Architecture
+== Architecture
 
 ```
 src/
@@ -91,13 +91,13 @@ src/
     └── swift_templates.zig  # Apple Store compliance layer
 ```
 
-### Why Zig?
+=== Why Zig?
 
-1. **Text Processing**: Handles string manipulation transparently (no lifetime gymnastics)
-2. **Compile Speed**: Compiles instantly - code-gen runs in milliseconds
-3. **Bootstrap Separation**: Outside the Rust dependency tree, no circular builds
+1. *Text Processing*: Handles string manipulation transparently (no lifetime gymnastics)
+2. *Compile Speed*: Compiles instantly - code-gen runs in milliseconds
+3. *Bootstrap Separation*: Outside the Rust dependency tree, no circular builds
 
-## Apple Store Compliance
+== Apple Store Compliance
 
 The templates in `swift_templates.zig` define "Current Best Practice SwiftUI".
 
@@ -108,7 +108,7 @@ When Apple announces iOS 19 with new concurrency:
 
 Your "Eternal Maintenance" problem is solved.
 
-## Supported Types
+== Supported Types
 
 | Rust | Swift |
 |------|-------|
@@ -121,12 +121,12 @@ Your "Eternal Maintenance" problem is solved.
 | `Option<T>` | `T?` |
 | Custom structs | Passed through |
 
-## Integration with UniFFI
+== Integration with UniFFI
 
 Synapse complements UniFFI:
 
-- **UniFFI** gives you data structures (`struct Reef`)
-- **Synapse** gives you UI bindings (`class ReefViewModel`)
+- *UniFFI* gives you data structures (`struct Reef`)
+- *Synapse* gives you UI bindings (`class ReefViewModel`)
 
 Use both together:
 
@@ -138,7 +138,7 @@ pub struct Reef {
 }
 ```
 
-## License
+== License
 
 MIT
 
