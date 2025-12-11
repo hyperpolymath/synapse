@@ -1,147 +1,76 @@
-= Synapse
+= synapse
+Jonathan D.A. Jewell <jonathan.jewell@gmail.com>
+:toc: macro
+:icons: font
+:source-highlighter: rouge
+:experimental:
+:url-github: https://github.com/hyperpolymath/synapse
+:url-gitlab: https://gitlab.com/hyperpolymath/synapse
+:url-bitbucket: https://bitbucket.org/hyperpolymath/synapse
+:url-codeberg: https://codeberg.org/hyperpolymath/synapse
 
-*Rust-to-SwiftUI Meta-Compiler*
+Neural connection simulation framework
 
-A Zig-based code generator that bridges the Rust↔Swift divide. Write your domain models once in Rust, get type-safe SwiftUI ViewModels automatically.
+image:https://img.shields.io/badge/RSR-Certified-gold[RSR Certified]
+image:https://img.shields.io/badge/License-AGPL%20v3-blue[License]
 
-== The Problem
+toc::[]
 
-Most developers:
-1. Write Rust logic
-2. Manually write Swift wrappers
-3. Apple releases iOS 18, deprecates `@StateObject` for `@Observable`
-4. Spend 3 weeks rewriting 50 files manually
+== Overview
 
-This is *Slop*.
+synapse is part of the link:https://rhodium.sh[Rhodium Standard] (RSR) ecosystem.
 
-== The Solution
+Domain: *software-development*
 
-With Synapse:
-1. Update `swift_templates.zig` line 12
-2. Run `just gen-ui`
-3. Entire app upgraded to latest iOS standards instantly
+== Installation
 
-You've effectively *decoupled your IP (Rust) from the whims of the platform (Apple)*.
+[source,bash]
+----
+# Clone from GitHub (primary)
+git clone {url-github}
 
-== Quick Start
+# Or from mirrors
+git clone {url-gitlab}
+git clone {url-codeberg}
+----
 
-```bash
-= Build Synapse
-just build
+== RSR Stack
 
-= Generate Swift from Rust
-just gen-ui
+This project follows RSR conventions:
 
-= Check the output
-cat examples/swift/Generated.swift
-```
+* ✅ ReScript for frontend/logic
+* ✅ Deno for JS runtime
+* ✅ WASM for performance-critical code
+* ✅ Rust/OCaml/Haskell for systems/proofs
+* ✅ Guile/Scheme for configuration
+* ❌ No TypeScript
+* ❌ No Go
+* ❌ No npm
 
-== Usage
+== Mirrors
 
-=== 1. Mark your Rust structs
+[cols="1,2"]
+|===
+| Platform | URL
 
-```rust
-#[derive(Synapse)]
-pub struct PlayerState {
-    pub coffee_count: i32,
-    pub is_drifting: bool,
-}
-```
-
-=== 2. Run the generator
-
-```bash
-just gen-ui input=src/models.rs output=ios/Generated.swift
-```
-
-=== 3. Use in SwiftUI
-
-```swift
-import SwiftUI
-
-struct PlayerView: View {
-    @State var model = PlayerStateViewModel()
-
-    var body: some View {
-        Text("Coffee: \(model.coffeeCount)")
-    }
-}
-```
-
-== Commands
-
-| Command | Description |
-|---------|-------------|
-| `just build` | Build the Synapse binary |
-| `just gen-ui` | Generate Swift ViewModels |
-| `just gen-ui-legacy` | Generate for iOS 14-16 |
-| `just test` | Run all tests |
-| `just deploy-ios ~/MyApp` | Generate and copy to Xcode project |
-| `just help` | Show CLI help |
-
-== Architecture
-
-```
-src/
-├── generators/
-│   └── synapse.zig      # Main entry point
-├── parser/
-│   └── rust_parser.zig  # Parses Rust struct definitions
-└── templates/
-    └── swift_templates.zig  # Apple Store compliance layer
-```
-
-=== Why Zig?
-
-1. *Text Processing*: Handles string manipulation transparently (no lifetime gymnastics)
-2. *Compile Speed*: Compiles instantly - code-gen runs in milliseconds
-3. *Bootstrap Separation*: Outside the Rust dependency tree, no circular builds
-
-== Apple Store Compliance
-
-The templates in `swift_templates.zig` define "Current Best Practice SwiftUI".
-
-When Apple announces iOS 19 with new concurrency:
-1. Update the template once
-2. Run `just gen-ui`
-3. Commit, upload to App Store
-
-Your "Eternal Maintenance" problem is solved.
-
-== Supported Types
-
-| Rust | Swift |
-|------|-------|
-| `i32`, `i64` | `Int`, `Int64` |
-| `u32`, `u64` | `UInt`, `UInt64` |
-| `f32`, `f64` | `Float`, `Double` |
-| `bool` | `Bool` |
-| `String` | `String` |
-| `Vec<T>` | `[T]` |
-| `Option<T>` | `T?` |
-| Custom structs | Passed through |
-
-== Integration with UniFFI
-
-Synapse complements UniFFI:
-
-- *UniFFI* gives you data structures (`struct Reef`)
-- *Synapse* gives you UI bindings (`class ReefViewModel`)
-
-Use both together:
-
-```rust
-#[derive(uniffi::Object, Synapse)]  // Both!
-pub struct Reef {
-    pub lat: f64,
-    pub lon: f64,
-}
-```
+| GitHub (primary) | {url-github}
+| GitLab | {url-gitlab}
+| Bitbucket | {url-bitbucket}
+| Codeberg | {url-codeberg}
+|===
 
 == License
 
-MIT
+Licensed under AGPL-3.0-or-later OR LicenseRef-Palimpsest-0.5.
 
----
+See link:LICENSE[LICENSE] for details.
 
-*"You describe the World in Rust, the Interface appears on iPhone."*
+== Contributing
+
+See link:CONTRIBUTING.adoc[CONTRIBUTING.adoc].
+
+== Metadata
+
+* Domain: software-development
+* Framework: RSR (Rhodium Standard Repository)
+* Dublin Core: link:.well-known/dc.xml[.well-known/dc.xml]
