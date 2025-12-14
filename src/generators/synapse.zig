@@ -12,22 +12,12 @@
 //   OR: just gen-ui
 
 const std = @import("std");
-const parser = @import("../parser/rust_parser.zig");
-const templates = @import("../templates/swift_templates.zig");
+const types = @import("types");
+const parser = @import("parser");
+const templates = @import("templates");
 
-pub const SynapseConfig = struct {
-    input_path: []const u8,
-    output_path: []const u8,
-    ios_version: u8 = 17, // Default to iOS 17+ compliance
-    generate_previews: bool = true,
-    use_observable: bool = true, // iOS 17 @Observable vs legacy @ObservedObject
-};
-
-pub const GeneratedOutput = struct {
-    swift_code: []const u8,
-    struct_count: usize,
-    warnings: std.ArrayList([]const u8),
-};
+pub const SynapseConfig = types.SynapseConfig;
+pub const GeneratedOutput = types.GeneratedOutput;
 
 /// Main entry point for the Synapse generator
 pub fn main() !void {
@@ -111,7 +101,13 @@ pub fn generateSwiftBindings(allocator: std.mem.Allocator, config: SynapseConfig
 
     // Parse Rust structs
     var structs = std.ArrayList(parser.RustStruct).init(allocator);
-    defer structs.deinit();
+    defer {
+        // Clean up each struct's fields and derives before deiniting the list
+        for (structs.items) |*s| {
+            s.deinit();
+        }
+        structs.deinit();
+    }
 
     try parser.parseRustStructs(content, &structs, allocator);
 

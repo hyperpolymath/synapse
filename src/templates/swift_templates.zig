@@ -11,9 +11,10 @@
 // No more manually updating 50 ViewModel files.
 
 const std = @import("std");
-const parser = @import("../parser/rust_parser.zig");
+const types = @import("types");
+const parser = @import("parser");
 
-const SynapseConfig = @import("../generators/synapse.zig").SynapseConfig;
+const SynapseConfig = types.SynapseConfig;
 
 /// Write the file header with imports and generation notice
 pub fn writeHeader(writer: anytype, config: SynapseConfig) !void {

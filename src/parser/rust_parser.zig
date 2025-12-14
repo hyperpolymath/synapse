@@ -71,6 +71,10 @@ pub const RustStruct = struct {
     derives: std.ArrayList([]const u8),
 
     pub fn deinit(self: *RustStruct) void {
+        // Free allocated derive strings
+        for (self.derives.items) |derive| {
+            self.derives.allocator.free(derive);
+        }
         self.fields.deinit();
         self.derives.deinit();
     }
@@ -157,6 +161,10 @@ pub fn parseRustStructs(content: []const u8, out_structs: *std.ArrayList(RustStr
                 in_struct = true;
                 brace_depth = 1;
             } else {
+                // Free derive strings before clearing
+                for (current_derives.items) |derive| {
+                    allocator.free(derive);
+                }
                 current_derives.clearRetainingCapacity();
             }
             current_doc = null;
@@ -191,6 +199,12 @@ pub fn parseRustStructs(content: []const u8, out_structs: *std.ArrayList(RustStr
             }
         }
     }
+
+    // Clean up any remaining derives at end of file
+    for (current_derives.items) |derive| {
+        allocator.free(derive);
+    }
+    current_derives.deinit();
 }
 
 fn parseDerive(line: []const u8, derives: *std.ArrayList([]const u8), allocator: std.mem.Allocator) !void {
