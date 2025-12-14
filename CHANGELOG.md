@@ -16,7 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Nothing yet
 
-## [0.1.0-alpha] - 2024-XX-XX
+## [0.1.0-alpha] - 2025-12-14
 
 Initial alpha release of Synapse - the Rust-to-SwiftUI meta-compiler.
 
