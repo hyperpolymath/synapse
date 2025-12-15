@@ -1,56 +1,54 @@
-# SPDX-License-Identifier: MIT
-# Git attributes for Synapse repository
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# RSR-compliant .gitattributes
 
-# Auto detect text files and perform LF normalization
-* text=auto
+* text=auto eol=lf
 
-# Zig source files
-*.zig text eol=lf diff=zig
+# Source
+*.rs    text eol=lf diff=rust
+*.ex    text eol=lf diff=elixir
+*.exs   text eol=lf diff=elixir
+*.jl    text eol=lf
+*.res   text eol=lf
+*.resi  text eol=lf
+*.ada   text eol=lf diff=ada
+*.adb   text eol=lf diff=ada
+*.ads   text eol=lf diff=ada
+*.hs    text eol=lf
+*.chpl  text eol=lf
+*.scm   text eol=lf
+*.ncl   text eol=lf
+*.nix   text eol=lf
 
-# Rust source files (for examples)
-*.rs text eol=lf diff=rust
+# Docs
+*.md    text eol=lf diff=markdown
+*.adoc  text eol=lf
+*.txt   text eol=lf
 
-# Swift source files (generated)
-*.swift text eol=lf diff=swift
+# Data
+*.json  text eol=lf
+*.yaml  text eol=lf
+*.yml   text eol=lf
+*.toml  text eol=lf
 
-# Documentation
-*.md text eol=lf diff=markdown
-*.adoc text eol=lf
-*.txt text eol=lf
+# Config
+.gitignore     text eol=lf
+.gitattributes text eol=lf
+justfile       text eol=lf
+Makefile       text eol=lf
+Containerfile  text eol=lf
 
-# Configuration
-*.yml text eol=lf
-*.yaml text eol=lf
-*.json text eol=lf
-*.toml text eol=lf
-Justfile text eol=lf
+# Scripts
+*.sh   text eol=lf
 
-# Build files
-build.zig text eol=lf
+# Binary
+*.png   binary
+*.jpg   binary
+*.gif   binary
+*.pdf   binary
+*.woff2 binary
+*.zip   binary
+*.gz    binary
 
-# Shell scripts
-*.sh text eol=lf
-
-# Ignore generated files in diffs
-examples/swift/Generated.swift linguist-generated=true
-
-# Binary files
-*.png binary
-*.jpg binary
-*.jpeg binary
-*.gif binary
-*.ico binary
-*.pdf binary
-
-# Archives
-*.zip binary
-*.tar binary
-*.gz binary
-
-# Treat .well-known files as text
-.well-known/* text eol=lf
-
-# Export-ignore (not included in archives)
-.git* export-ignore
-.well-known export-ignore
-tests/ export-ignore
+# Lock files
+Cargo.lock  text eol=lf -diff
+flake.lock  text eol=lf -diff
