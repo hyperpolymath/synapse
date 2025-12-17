@@ -8,6 +8,8 @@ Synapse aims to be the definitive tool for bridging Rust and SwiftUI, eliminatin
 
 ## Current Status: v0.1.0 (Alpha)
 
+**Last Updated: 2025-12-17**
+
 Core functionality implemented:
 - [x] Rust struct parsing
 - [x] Basic type mapping
@@ -15,6 +17,17 @@ Core functionality implemented:
 - [x] iOS 17+ @Observable support
 - [x] Legacy iOS support
 - [x] Justfile integration
+
+Infrastructure & Security (completed 2025-12):
+- [x] RSR Gold compliance
+- [x] SHA-pinned GitHub Actions (supply chain security)
+- [x] SPDX license headers on all files
+- [x] Dual license (MIT OR AGPL-3.0-or-later)
+- [x] Guix package definition (guix.scm)
+- [x] Nix flake fallback (flake.nix)
+- [x] CodeQL security scanning
+- [x] OSSF Scorecard integration
+- [x] TruffleHog secret detection
 
 ## Short Term
 
