@@ -67,7 +67,8 @@ Out of scope:
 
 | Date | Auditor | Scope | Result |
 |------|---------|-------|--------|
-| 2024-01 | Internal | Initial release | No issues found |
+| 2024-12 | Internal | Initial release | No issues found |
+| 2025-12 | Internal | GitHub Actions security | SHA-pinned all actions |
 
 ## Disclosure Policy
 
